@@ -14,28 +14,28 @@ from preprocessing import tokenize_single # Should eventually be from lib-ml
 app = Flask(__name__)
 swagger = Swagger(app)
 
-@app.route('/', methods=['POST'])
+@app.route('/predict', methods=['POST'])
 def predict(): # Change this specification
     """
-    Predict whether an SMS is Spam.
+    Predict whether a link is a phishing link.
     ---
     consumes:
       - application/json
     parameters:
         - name: input_data
           in: body
-          description: message to be classified.
+          description: link to be evaluated.
           required: True
           schema:
             type: object
-            required: sms
+            required: link
             properties:
-                sms:
+                link:
                     type: string
-                    example: This is an example of an SMS.
+                    example: https://www.tudelft.nl/en/student/administration/termination-of-enrolment
     responses:
       200:
-        description: "The result of the classification: 'spam' or 'ham'."
+        description: "The result of the classification: 'phishing' or 'legitimate'."
     """
     #input_data = request.get_json()
     link = request.get_json().get('link')
