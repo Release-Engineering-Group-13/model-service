@@ -1,9 +1,7 @@
 services:
   serve-model:
-    image: temp
+    image: ghcr.io/vtimmertud/model-service:test
     ports:
       - 8080:8080
     volumes:
       - ./output:/root/output/
-
-
