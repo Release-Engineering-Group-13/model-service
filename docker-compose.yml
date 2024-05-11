@@ -1,6 +1,6 @@
 services:
   serve-model:
-    image: ghcr.io/vtimmertud/model-service:test
+    image: ghcr.io/release-engineering-group-13/model-service:latest 
     ports:
       - 8080:8080
     volumes:

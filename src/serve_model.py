@@ -1,21 +1,20 @@
 """
-Flask API of the SMS Spam detection model model.
+Flask API of the phishing link detection model.
 """
-#import traceback
+
 import joblib
 from flask import Flask, jsonify, request
 from flasgger import Swagger
-#import pandas as pd
 import numpy as np
 
-#from text_preprocessing import prepare, _extract_message_len, _text_process
-from preprocessing import tokenize_single # Should eventually be from lib-ml
+#from preprocessing import tokenize_single # Should eventually be from lib-ml
+from lib_ml import preprocess_input 
 
 app = Flask(__name__)
 swagger = Swagger(app)
 
 @app.route('/predict', methods=['POST'])
-def predict(): # Change this specification
+def predict(): 
     """
     Predict whether a link is a phishing link.
     ---
@@ -37,26 +36,24 @@ def predict(): # Change this specification
       200:
         description: "The result of the classification: 'phishing' or 'legitimate'."
     """
-    #input_data = request.get_json()
+
     link = request.get_json().get('link')
-    processed_link = tokenize_single(link)
-    print("Processed link: ", processed_link)
-    model = joblib.load('output/model.joblib') # Should eventually be downloaded from remote
+    processed_link = preprocess_input(link)
+    #print("Processed link: ", processed_link)
+    model = joblib.load('output/model.joblib') # may have to change path in final version
     #prediction = model.predict(processed_link)[0]
     prediction = model.predict(processed_link)
-    print("Length of prediction: ", len(prediction))
+    #print("Length of prediction: ", len(prediction))
     prediction = (np.array(prediction) > 0.5).astype(int)
-    print("Length of link: ", len(link))
+    #print("Length of link: ", len(link))
+
+    #Test code, remove
+    #with open('output/test.txt', 'r') as file:
+    #  file_content = file.read()
+    #print(file_content)
     
-    #res = {
-    #    "result": "prediction",
-    #    "classifier": "decision tree",
-    #    "link": link
-    #}
-    #print(res)
-    #return jsonify(res)
     res = {
-        "Prediction" : prediction.tolist(),
+        "Prediction" : "TODO",
         "Link" : link
     }
     return jsonify(res)
