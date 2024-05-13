@@ -1,0 +1,7 @@
+services:
+  serve-model:
+    image: ghcr.io/release-engineering-group-13/model-service:latest 
+    ports:
+      - 8080:8080
+    volumes:
+      - ./output:/root/output/
