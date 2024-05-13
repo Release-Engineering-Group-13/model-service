@@ -13,5 +13,4 @@
 ## TODOS:
 - folder output content should be fetched from model-training somehow.
 - docker-compose should not be in this repo but in operations. 
-- Workflow does not work due to uppercase characters in organization name (I can't change the name).
-- Unable to change image accessibility to public (I don't have access to organization settings). Remove test versions in organization registry before making public (I can't do this either). 
+- Workflow does not work.
