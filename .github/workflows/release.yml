@@ -5,6 +5,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      - name: Convert repository name to lowercase
+        run: |
+          echo "REPO=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
     steps:
       - uses: actions/checkout@v4
       - name: Parse version info from tag
@@ -23,7 +27,7 @@ jobs:
 
       - name: Build, tag and push Docker image
         run: | 
-          IMG=ghcr.io/${{ github.repository }}
+          IMG=ghcr.io/${{ env.REPO }}
           docker build \
             --tag $IMG:${{ env.version }} \
             --tag $IMG:${{ env.version_major }}.${{ env.version_minor }}.latest \
