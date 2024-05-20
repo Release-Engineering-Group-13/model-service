@@ -13,7 +13,7 @@
     docker-compose up
     ```
 3. Go to localhost:8080/apidocs
-4. Click try it out button, then execute 
+4. Click "try it out button", then "execute" 
 
 ## TODOS:
 - docker-compose should not be in this repo but in operations along with corresponding instructions. 
