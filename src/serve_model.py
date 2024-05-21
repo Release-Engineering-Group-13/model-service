@@ -40,7 +40,7 @@ def predict():
 
     link = request.get_json().get('link')
     _, processed_link = preprocess_input(link)
-    model = joblib.load('output/model.joblib')  # may have to change path in final version
+    model = joblib.load('model/model.joblib')  # may have to change path in final version
     prediction = model.predict(processed_link)[0]
     prediction = (np.array(prediction) > 0.5).astype(int).tolist()  # 0 if phishing, 1 if legitimate
     print(prediction)
@@ -53,5 +53,5 @@ def predict():
 
 
 if __name__ == '__main__':
-    clf = joblib.load('output/model.joblib')
+    clf = joblib.load('model/model.joblib')
     app.run(host="0.0.0.0", port=8080, debug=True)
