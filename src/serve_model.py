@@ -10,6 +10,12 @@ import numpy as np
 from lib_ml import preprocess_input
 #from preprocessing import preprocess_input
 
+
+#download model
+import import_model as im
+im.ImportModel().import_model()
+
+
 app = Flask(__name__)
 swagger = Swagger(app)
 
