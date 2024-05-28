@@ -5,7 +5,7 @@
 0. If the trained model has not been downloaded yet, install ellipsis and fetch the model. Otherwise, ignore this step
     ```bash
     pip install ellipsis
-    python fetch_model.py
+    python src/fetch_model.py
     ```
 1. cd to directory where docker-compose.yml resides
 2. Pull and run the image 
