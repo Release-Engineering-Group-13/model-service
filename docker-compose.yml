@@ -5,3 +5,12 @@ services:
       - 8080:8080
     volumes:
       - ./model:/root/model/
+    networks:
+      - default-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+
+networks:
+  default-network:
+    driver: bridge
