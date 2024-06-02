@@ -6,6 +6,7 @@ import joblib
 from flask import Flask, jsonify, request
 from flasgger import Swagger
 import numpy as np
+from fetch_model import fetch_model
 
 from lib_ml import preprocess_input
 #from preprocessing import preprocess_input
@@ -53,5 +54,6 @@ def predict():
 
 
 if __name__ == '__main__':
+    fetch_model()
     clf = joblib.load('model/model.joblib')
     app.run(host="0.0.0.0", port=8080, debug=True)
