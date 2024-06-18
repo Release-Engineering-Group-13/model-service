@@ -161,3 +161,6 @@ cython_debug/
 
 # Don't add models
 model/
+
+# our output
+output/

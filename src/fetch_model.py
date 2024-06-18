@@ -1,6 +1,7 @@
 import os
 import ellipsis as el
 
+
 def fetch_model():
     """Downloads pretrained model from remote drive."""
 
@@ -10,7 +11,11 @@ def fetch_model():
         os.makedirs(directory)
     
     # Download pretrained model
-    el.path.file.download(pathId='c7894e6f-1a2f-40b2-ab48-01e01e915790', filePath=directory+'/model.joblib')
+    folderId='12b2838a-fa7e-4215-bb50-069df2879311'
+    listFolder = el.path.folder.listFolder(pathId=folderId)
+    for file in listFolder['result']:
+        el.path.file.download(pathId=file['id'], filePath='model/'+file['name'])
+    
 
 if __name__ == "__main__":
     fetch_model()
