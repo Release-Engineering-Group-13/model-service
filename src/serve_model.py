@@ -15,23 +15,16 @@ from lib_ml import preprocess_input
 
 
 app = Flask(__name__)
-swagger_config = {
-    "headers": [
-    ],
-    "specs": [
-        {
-            "endpoint": 'apispec_1',
-            "route": '/apispec_1.json',
-            "rule_filter": lambda rule: True,  # all in
-            "model_filter": lambda tag: True,  # all in
-        }
-    ],
-    "static_url_path": "/flasgger_static",
-    "swagger_ui": True,
-    "specs_route": "/apidocs/",
-    "url_prefix": os.environ.get('URL_PREFIX', '')
+template = {
+  "swagger": "2.0",
+  "info": {
+    "title": "Model Service API",
+    "description": "API for the model service",
+    "version": "1.0.0"
+  },
+  "basePath": os.environ.get("URL_PREFIX", ""),  
 }
-swagger = Swagger(app, config=swagger_config)
+swagger = Swagger(app, template=template)
 
 
 @app.route('/predict', methods=['POST'])
