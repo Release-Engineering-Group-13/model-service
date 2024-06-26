@@ -2,9 +2,11 @@
 Flask API of the phishing link detection model.
 """
 
+import os
 import joblib
 from flask import Flask, jsonify, request
-from flasgger import Swagger
+from flasgger import Swagger, LazyString, LazyJSONEncoder
+
 import numpy as np
 from fetch_model import fetch_model
 
@@ -13,7 +15,10 @@ from lib_ml import preprocess_input
 
 
 app = Flask(__name__)
-swagger = Swagger(app)
+app.json_encoder = LazyJSONEncoder
+
+template = dict(swaggerUiPrefix=LazyString(lambda : os.environ.get('URL_PREFIX', '')))
+swagger = Swagger(app, template=template)
 
 
 @app.route('/predict', methods=['POST'])
