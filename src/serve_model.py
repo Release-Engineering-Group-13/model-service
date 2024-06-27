@@ -12,11 +12,6 @@ from lib_ml import preprocess_input
 #from preprocessing import preprocess_input
 
 
-#download model
-import import_model as im
-im.ImportModel().import_model()
-
-
 app = Flask(__name__)
 swagger = Swagger(app)
 
@@ -50,7 +45,7 @@ def predict():
     model = joblib.load('model/model.joblib')  # may have to change path in final version
     prediction = model.predict(processed_link)[0]
     prediction = (np.array(prediction) > 0.5).astype(int).tolist()  # 0 if phishing, 1 if legitimate
-    print(prediction)
+    print(link,prediction)
 
     res = {
         "Link": link,
